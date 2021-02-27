@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="flex align-center justify-center">
+        <nav class="flex align-center justify-space-between container">
+            <h1 class="LOGO">GiveMe<span>Task</span></h1>
+            <div></div>
+            <h1 class="navH1">Your Tasks</h1>
+        </nav>
+    </header>
+    <section id="AllDocument" class="flex wrap">
+        <div class="options flex column align-center">
+            <h1 class="h1Main">Добавить задание</h1>
+            <div class="option_des flex column align-top justify-center">
+                <div class="flex column">
+                    <label for="Name">Заголовок</label>
+                    <input type="text" id="Name" autocomplete="off">
+                </div>
+                <div class="flex column">
+                    <label for="Type">Тип задачи</label>
+                    <select name="" id="Type">
+                        <option value="Встреча">Встреча</option>
+                        <option value="Домашние дела">Домашние дела</option>
+                        <option value="Работа">Работа</option>
+                        <option value="Код">Код</option>
+                    </select>
+                </div>
+                <div class="flex column">
+                    <label for="Times">Сроки выполнения</label>
+                    <select name="" id="Times">
+                        <option value="Срочно">Срочно</option>
+                        <option value="Подождёт">Подождёт</option>
+                        <option value="В очереди">В очереди</option>
+                        <option value="Последний день">Последний день</option>
+                    </select>
+                </div>
+                <div class="flex align-center justify-center"><button id="add">Добавить</button></div>
+            </div>
+        </div>
+        <div class="tasks flex wrap" id="tasks">
+            
+        </div>
+    </section>
+    <section id="changeText" class="change flex column align-center justify-center">
+        <div class="flex column align-center justify-center">
+            <h1 class="h2Main">Редактирование задачи</h1>
+            <textarea name="TaskDesc" id="newDesc" cols="30" rows="10" placeholder="Ваша задача"></textarea>
+            <div class="buttons flex wrap justify-space-around">
+                <button id="accept">Подтвердить</button>
+                <button id="back">Отменить</button>
+            </div>
+        </div>
+    </section>
+    <script src="index.js"></script>
+</body>
+</html>

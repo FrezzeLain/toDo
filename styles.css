@@ -1,0 +1,281 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 100;
+    font-family: sans-serif;
+}
+
+.flex{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.align-start{
+    align-items: flex-start;
+}
+
+.align-end{
+    align-items: flex-end;
+}
+
+.align-space-between{
+    align-items: space-between;
+}
+
+.align-space-around{
+    align-items: space-around;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.justify-start{
+    justify-content: flex-start;
+}
+
+.justify-space-around{
+    justify-content: space-around;
+}
+
+.justify-space-between{
+    justify-content: space-between;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    width: 80vw;
+    margin: 0 auto;
+    height: 7vh;
+}
+
+.LOGO{
+    font-size: 3.2vh;
+    font-weight: 100;
+}
+
+.LOGO span{
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.navH1{
+    font-size: 3vh;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+#AllDocument{
+    width: 80vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+.h1Main{
+    font-size: 2.2vh;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 1vh;
+}
+
+.h1Main:after{
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    width: 100%;
+    height: 0.1vh;
+    background-color: black;
+}
+
+.h2Main{
+    font-size: 2.2vh;
+    text-transform: uppercase;
+    margin-bottom: 2vh;
+}
+
+.options{
+    width: 20vw;
+    height: 38vh;
+    z-index: 1;
+    box-shadow: 0 0 1vh black;
+    padding: 2vh 0 3vh 0;
+}
+
+.options label{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    font-size: 2vh;
+    padding-right: 1vh;
+    text-transform: uppercase;
+}
+
+.options input[type='text']{
+    font-size: 2vh;
+    padding: 0.5vh;
+}
+
+.options select{
+    font-size: 2vh;
+    padding: 0.5vh;
+}
+
+.options button{
+    margin-top: 2vh;
+    font-size: 2vh;
+    text-transform: uppercase;
+    padding: 0.5vh 2.5vh;
+    background-color: inherit;
+    border: 0.1vh solid black;
+    cursor: pointer;
+}
+
+.tasks{
+    position: relative;
+    width: 60vw;
+    min-height: 80vh;
+}
+
+.task{
+    width: 300px;
+    min-height: 370px;
+    max-height: 420px;
+    background-color: white;
+    border: 0.1vh solid black;
+    margin: 0 0 2vh 2vh;
+}
+
+.h1Task{
+    width: 100%;
+    text-align: center;
+    padding: 0.8vh 1vh;
+    font-size: 2.5vh;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.h1Task:after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 0.1vh;
+    background-color: black;
+}
+
+.descriptionTask{
+    min-height: 23vh;
+    max-height: 23vh;
+    overflow-y: scroll;
+    
+}
+
+.descriptionTask p{
+    padding: 2vh 1vh 0.5vh 1vh;
+    text-align: justify;
+    font-size: 1.8vh;
+}
+
+.aboutTask{
+    padding: 0.8vh 0;
+}
+
+.h2Task{
+    font-size: 2vh;
+    padding: 0.5vh 1vh;
+    margin: 0.5vh 0.5vh;
+    border-radius: 5px;
+    background-color: yellow;
+    box-shadow: 1px 1px 0.4vh black;
+}
+
+/* Colors */
+
+.h2Red{
+    background-color: #f39c12;
+    color: white;
+}
+
+.h2Yellow{
+    background-color: yellow;
+}
+
+.h2Green{
+    background-color: #2ecc71;
+}
+
+.h2Last{
+    background-color: #c0392b;
+    color: white;
+}
+
+.h2Blue{
+    background-color: #3498db;
+}
+
+/* /Colors */
+
+.changedelete{
+    padding: 1vh 0;
+}
+
+.changedelete button{
+    font-size: 1.6vh;
+    padding: 0.5vh 0.8vh;
+    margin: 0 0.5vh;
+    background-color: white;
+    border: 0.1vh solid black;
+    cursor: pointer;
+}
+
+/* ChangeArea */
+
+.change{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(189, 195, 199,0.9);  
+    display: none;
+}
+
+.change textarea{
+    min-width: 400px;
+    min-height: 250px;
+    max-width: 400px;
+    max-height: 250px;
+    padding: 1vh;
+    font-size: 2vh;
+}
+
+.buttons{
+    width: 70%;
+}
+
+.buttons button{
+    font-size: 1.8vh;
+    padding: 0.5vh;
+    margin: 1vh 0 0 0;
+}
+
+/* /ChangeArea */
