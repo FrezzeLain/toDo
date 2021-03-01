@@ -203,7 +203,6 @@ header{
     padding: 0.5vh 1vh;
     margin: 0.5vh 0.5vh;
     border-radius: 5px;
-    background-color: yellow;
     box-shadow: 1px 1px 0.4vh black;
 }
 
@@ -249,7 +248,7 @@ header{
 /* ChangeArea */
 
 .change{
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     z-index: 1001;
