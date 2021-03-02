@@ -1,105 +1,14 @@
-    //Начальные переменные
+// Классы
 
-    let ClientConst = {
-        //Функциональные блоки
-        BodyBlock : document.getElementById('tasks'),
-        ButtonAddTask : document.getElementById('add'),
-        ChangeBlock : document.getElementById('changeText'),
-        ChangeAccept : document.getElementById('accept'),
-        ChangeBack : document.getElementById('back'),
-        ChangeText : document.getElementById('newDesc'),
-        //Блоки с переменными
-        BlockNameTask : document.getElementById('Name'),
-        BlockTypeTask : document.getElementById('Type'),
-        BlockTimeTask : document.getElementById('Time'),
-        //Логические данные
-        TasksMassiv : [],
-        TaskIndex : 0,
-        NumbersMassiv : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        CurrnetTask: ''
-    }
+class MyList{
+    MassivTasks = []
 
-    //EventListeners
-
-    ClientConst.ButtonAddTask.addEventListener('click', NewTask)
-    ClientConst.ChangeAccept.addEventListener('click', AcceptChange)
-    ClientConst.ChangeBack.addEventListener('click', RejectChange)
-
-    //Классы
-
-    class Task{
-        config = {
-            name: '',
-            des: '',
-            type: '',
-            time: ''
-        }
-
-        constructor(Name, Type, Time){
-            this.config.name = Name
-            this.config.des = 'Default Description'
-            this.config.type = Type
-            this.config.time = Time
-        }
-
-        renderTask(){
-            let status = IsTask(this.config.name)
-            if(status === 1){
-                console.log('Задача с таким именем уже существует.')
-            } else{
-                render(this.config)
-                ClientConst.TasksMassiv[ClientConst.TaskIndex] = this
-                ClientConst.TaskIndex++
-                ClientConst.BlockNameTask.value = ''
-            }
-        }
-
-        deleteThisTask(){
-            let Block = ClientConst.BodyBlock.querySelector('.'+ClientConst.TasksMassiv[ClientConst.CurrnetTask].config.name)
-            Block.remove()
-        }
-
-        changeThisTask(NewDes){
-            console.log('Изменение описания:')
-            this.config.des = NewDes
-        }
-    }
-
-    //Функции
-
-        //Добавление задачи
-    
-    function NewTask(){
-        if(ClientConst.BlockNameTask.value.trim() == ''){
-            console.log('Название не может быть пустой строкой')
-        } else if(ClientConst.NumbersMassiv.indexOf(ClientConst.BlockNameTask.value.trim().split('')[0]) > -1){
-            console.log('Название не может начинаться с цифры')
-        } else{
-            let NTask = new Task(ClientConst.BlockNameTask.value.trim(), ClientConst.BlockTypeTask.value, ClientConst.BlockTimeTask.value)
-            NTask.renderTask()
-        }
-    }
-
-        //Проверка наличия Задачи
-
-    function IsTask(Name){
-        Count = ClientConst.BodyBlock.querySelectorAll(`.${Name}`).length
-        if(Count > 0){
-            return 1
-        }
-        return 0
-    }
-
-        //Генерация блоков HTML
-
-    function render(NewTask){
-         //Создание объекта Класса Task
-        let MyTask = NewTask
+    RenderOne(Index){
         //Считывание данных объекта
-        let NameTask = MyTask.name
-        let TypeTask = MyTask.type
-        let TimeTask = MyTask.time
-        let DesTask = MyTask.des
+        let NameTask = this.MassivTasks[Index].config.Name
+        let TypeTask = this.MassivTasks[Index].config.Type
+        let TimeTask = this.MassivTasks[Index].config.Time
+        let DesTask = this.MassivTasks[Index].config.Description
         //Генерация HTML - элементов
             //Основыне блоки
         let MainDIv = document.createElement('div')
@@ -166,52 +75,139 @@
         Description.append(DescriptionP)
         MainAbout.append(Type, Time)
         MainChange.append(buttonChange, buttonDelete)
-        ClientConst.BodyBlock.append(MainDIv) 
+        ClientConst.BodyBlock.append(MainDIv)
+        ClientConst.TaskIndex++
     }
 
-        //Изменение описания задачи
+    RenderAll(){
+        for (let index = 0; index < this.MassivTasks.length; index++) {
+            if(this.MassivTasks[index] != null){
+                this.RenderOne(index)
+            } else{
+                ClientConst.TaskIndex++
+            }            
+        }
+    }
 
-    function changeTask(){
-        let MassName = this.className.split('')
+    Delete(TaskIndex){
+        this.MassivTasks[TaskIndex] = null
+    }
+}
+
+class Task{
+    config = {
+        Name: '',
+        Description: 'Deafult description',
+        Type: '',
+        Time: ''
+    }
+
+    constructor(Name, Type, Time){
+        this.config.Name = Name
+        this.config.Type = Type
+        this.config.Time = Time
+    }
+
+    Change(NewDescription){
+        this.config.Description = NewDescription
+    } 
+}
+
+//Начальные переменные
+
+let AllTasks = new MyList
+
+let ClientConst = {
+    //Функциональные блоки
+    BodyBlock : document.getElementById('tasks'),
+    ButtonAddTask : document.getElementById('add'),
+    ChangeBlock : document.getElementById('changeText'),
+    ChangeAccept : document.getElementById('accept'),
+    ChangeBack : document.getElementById('back'),
+    ChangeText : document.getElementById('newDesc'),
+    //Блоки с переменными
+    BlockNameTask : document.getElementById('Name'),
+    BlockTypeTask : document.getElementById('Type'),
+    BlockTimeTask : document.getElementById('Time'),
+    //Логические данные
+    TaskIndex : 0,
+    NumbersMassiv : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '!', ',', '$', '#', '?', '*'],
+    CurrnetTask: ''
+}
+
+//EventListeners
+
+ClientConst.ButtonAddTask.addEventListener('click', addTask)
+ClientConst.ChangeAccept.addEventListener('click', AcceptChange)
+ClientConst.ChangeBack.addEventListener('click', RejectChange)
+
+//Функции
+
+function addTask(){
+    if(ClientConst.BlockNameTask.value.trim() == '' || ClientConst.NumbersMassiv.indexOf(ClientConst.BlockNameTask.value.trim().split('')[0]) != -1){
+        console.log('Имя задачи не может быть пустой строкой, а так же не может начинаться с цифры.')
+    } else{
+        let NewTask = new Task(ClientConst.BlockNameTask.value, ClientConst.BlockTypeTask.value, ClientConst.BlockTimeTask.value)
+        let ResultOfCheck = CheckTask(NewTask.config.Name)
+        if(ResultOfCheck != 1){
+            console.log(`Добавляю новую задачу с именем: ${NewTask.config.Name}`)
+            AllTasks.MassivTasks[ClientConst.TaskIndex] = NewTask
+            AllTasks.RenderOne(ClientConst.TaskIndex)
+            ClientConst.BlockNameTask.value = ''
+        } else{
+            console.log(`Задача с именем ${NewTask.config.Name} уже существует.`)
+        }
+    }
+}
+
+function CheckTask(NameTask){
+    for (let index = 0; index < AllTasks.MassivTasks.length; index++) {
+        if(AllTasks.MassivTasks[index] == null){
+
+        } else{
+            if(NameTask.toUpperCase() == AllTasks.MassivTasks[index].config.Name.toUpperCase()){
+                return 1
+            }
+        }
+    }
+    return 0
+}
+
+function changeTask(){
+    let MassName = this.className.split('')
         for(let i = 0; i < 4; i++){
             MassName.splice(0,1)
         }
         MassName = MassName.join('')
-        
+
         ClientConst.ChangeBlock.style.display = `flex`
-        ClientConst.ChangeText.value = ClientConst.TasksMassiv[MassName].config.des
+        ClientConst.ChangeText.value = AllTasks.MassivTasks[MassName].config.Description
         ClientConst.CurrnetTask = MassName
+}
+
+function AcceptChange(){
+    let NewDes = ClientConst.ChangeText.value
+    AllTasks.MassivTasks[ClientConst.CurrnetTask].Change(NewDes)
+    let CurrentMain = document.querySelector('.'+AllTasks.MassivTasks[ClientConst.CurrnetTask].config.Name)
+    let CurrentP = CurrentMain.querySelector('.desP')
+    CurrentP.innerText = NewDes
+    ClientConst.ChangeBlock.style.display = `none`
+}
+
+function RejectChange(){
+    ClientConst.ChangeBlock.style.display = `none`
+} 
+
+function deleteTask(){
+    let MassName = this.className.split('')
+    for(let i = 0; i < 4; i++){
+        MassName.splice(0,1)
     }
-
-        //Принять изменения
-
-    function AcceptChange(){
-        let NewDes = ClientConst.ChangeText.value
-        ClientConst.TasksMassiv[ClientConst.CurrnetTask].changeThisTask(NewDes)
-        let CurrentMain = document.querySelector('.'+ClientConst.TasksMassiv[ClientConst.CurrnetTask].config.name)
-        let CurrentP = CurrentMain.querySelector('.desP')
-        CurrentP.innerText = NewDes
-        ClientConst.ChangeBlock.style.display = `none`
-    }
-
-        //Отклонить изменения
-
-    function RejectChange(){
-        ClientConst.ChangeBlock.style.display = `none`
-    }
-
-        //Удаление задачи
-
-    function deleteTask(){
-        let MassName = this.className.split('')
-        for(let i = 0; i < 4; i++){
-            MassName.splice(0,1)
-        }
-        MassName = MassName.join('')
-        ClientConst.CurrnetTask = MassName
-        console.log(ClientConst.CurrnetTask)
-
-        ClientConst.TasksMassiv[MassName].deleteThisTask()
-        ClientConst.TasksMassiv[MassName] = ''
-        ClientConst.TaskIndex = ClientConst.TaskIndex - 1
-    }
+    MassName = MassName.join('')
+    ClientConst.CurrnetTask = MassName
+    AllTasks.Delete(MassName)
+    console.log(MassName)
+    ClientConst.TaskIndex = 0
+    ClientConst.BodyBlock.innerHTML = ''
+    AllTasks.RenderAll()
+} 
